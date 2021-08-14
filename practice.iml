@@ -8,5 +8,8 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="mysql-connector-java-8.0.25" level="project" />
+    <orderEntry type="library" name="commons-cli-1.4" level="project" />
+    <orderEntry type="library" name="httpclient5-5.1" level="project" />
+    <orderEntry type="library" name="httpcore5-5.1.1" level="project" />
   </component>
 </module>

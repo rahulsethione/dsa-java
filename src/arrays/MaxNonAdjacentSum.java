@@ -1,6 +1,6 @@
 package arrays;
 
-public class MaxAdjacentSum {
+public class MaxNonAdjacentSum {
     public static void main(String[] args) {
         int[] test1 = { 5, 10, 100, 100, 10, 5 };
         int[] test2 = { 10, 5, 20, 40, 25, 35, 15 };

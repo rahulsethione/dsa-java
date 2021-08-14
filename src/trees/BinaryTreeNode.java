@@ -37,4 +37,38 @@ public class BinaryTreeNode<T> {
     public void setRightChild(BinaryTreeNode<T> rightChild) {
         this.rightChild = rightChild;
     }
+
+    public BinaryTreeNode copySubtree(BinaryTreeNode node) {
+        if(node == null) return null;
+
+        BinaryTreeNode copy = new BinaryTreeNode(node.getData());
+
+        if(node.getLeftChild() != null) {
+            copy.setLeftChild(copySubtree(node.getLeftChild()));
+        }
+
+        if (node.getRightChild() != null) {
+            copy.setRightChild(copySubtree(node.getRightChild()));
+        }
+
+        return copy;
+    }
+
+    public void invert() {
+        if(isLeaf()) return;
+
+        BinaryTreeNode temp = rightChild;
+        rightChild = leftChild;
+        leftChild = temp;
+
+        if(leftChild != null)
+            leftChild.invert();
+
+        if(rightChild != null)
+            rightChild.invert();
+    }
+
+    public boolean isLeaf() {
+        return leftChild == null && rightChild == null;
+    }
 }

@@ -11,6 +11,9 @@ public class ArrayJumpingProblem {
 
         log(reachable(arr1, 0));
         log(reachable(arr2, 0));
+
+        log(linearReachable(arr1));
+        log(linearReachable(arr2));
     }
 
     private static void log(Object printable) { System.out.println(printable); }
@@ -30,5 +33,19 @@ public class ArrayJumpingProblem {
         }
 
         return result;
+    }
+
+    public static boolean linearReachable(int[] arr) {
+        int step = arr.length - 1;
+
+        for(int i = arr.length - 2; i >= 0; i--) {
+            int dist = step - i;
+
+            if(arr[i] >= dist) {
+                step = i;
+            }
+        }
+
+        return step == 0;
     }
 }

@@ -17,7 +17,7 @@ public abstract class Heap<T extends Comparable<T>> {
         this.treeRoot = fromArray(this.array, 0);
     }
 
-    private void heapify(T[] arr, int i) {
+    protected void heapify(T[] arr, int i) {
         int left = 2 * i + 1,
                 right = 2 * i + 2;
 
@@ -43,7 +43,7 @@ public abstract class Heap<T extends Comparable<T>> {
         arr[j] = temp;
     }
 
-    private BinaryTreeNode<T> fromArray(T[] arr, int i) {
+    protected BinaryTreeNode<T> fromArray(T[] arr, int i) {
         if(i >= arr.length) {
             return null;
         }
@@ -76,6 +76,9 @@ public abstract class Heap<T extends Comparable<T>> {
     }
 
     public boolean remove(T item) {
+        /**
+         * Find index of item to be removed in the heap array and replace it with with the last item value. Call 'heapify' on index.
+         */
         int index = 0;
         boolean found = false;
         for(int i = 0; i < array.length; i++) {
@@ -111,5 +114,4 @@ public abstract class Heap<T extends Comparable<T>> {
             heapifyParent(arr, parent);
         }
     }
-
 }

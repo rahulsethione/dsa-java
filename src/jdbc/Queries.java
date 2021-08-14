@@ -39,4 +39,11 @@ public interface Queries {
     String FIND_MAX_AVG_BY_TYPE = "SELECT ROUND(AVG(price), 2) as avg_price, MAX(price) as max_price, preference_type \n" +
             "FROM practice.menu_items\n" +
             "Group by preference_type;";
+
+    String FIND_RESTAURANT_SALES_AND_GROSSING_ITEMS = "SELECT MI.name as NAME, SUM(OI.quantity) as SALES, SUM(OI.quantity) * MI.price AS VOLUME_SALES FROM practice.restaurants R \n" +
+            "LEFT JOIN practice.menu_items MI on MI.restaurant_id = R.restaurant_id \n" +
+            "LEFT JOIN practice.order_item OI on OI.menu_item_id = MI.menu_item_id \n" +
+            "WHERE R.restaurant_id = ? \n" +
+            "GROUP BY OI.menu_item_id, MI.name, MI.price \n" +
+            "ORDER BY SALES DESC;";
 }

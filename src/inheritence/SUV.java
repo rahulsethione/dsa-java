@@ -21,6 +21,10 @@ public class SUV extends Car {
         super(makeYear, brand, modelName, revision, seatingCapacity, color);
     }
 
+    public SUV(int makeYear, String brand, String modelName, String color) {
+        this(makeYear, brand, modelName, 0, getDefaultSeatingCapacity(), color);
+    }
+
 //    @Override
 //    public int getSeatingCapacity() {
 //        return seatingCapacity;

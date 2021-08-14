@@ -56,6 +56,7 @@ public class Graph<T> {
                 continue;
 
             queue.add(entry.getKey()); // Enqueue
+            visitedVertices.add(entry.getKey());
 
             while(!queue.isEmpty()) {
                 Vertex<T> front = queue.remove();
@@ -63,6 +64,7 @@ public class Graph<T> {
                 consumerFunction.accept(front.data);
                 for(Vertex<T> vertex : adjacencyMap.get(front)) {
                     if(!visitedVertices.contains(vertex)) {
+                        visitedVertices.add(vertex);
                         queue.add(vertex); // Enqueue
                     }
                 }
@@ -79,6 +81,7 @@ public class Graph<T> {
                 continue;
 
             stack.push(entry.getKey());
+            visitedVertices.add(entry.getKey());
 
             while (!stack.isEmpty()) {
                 Vertex<T> top = stack.pop();
@@ -86,8 +89,10 @@ public class Graph<T> {
                 consumerFunction.accept(top.data);
                 visitedVertices.add(top);
                 adjacencyMap.get(top).forEach(v -> {
-                    if(!visitedVertices.contains(v))
+                    if(!visitedVertices.contains(v)) {
                         stack.push(v);
+                        visitedVertices.add(v);
+                    }
                 });
             }
         }

@@ -1,7 +1,5 @@
 package linkedlists;
 
-import java.util.List;
-import java.util.Stack;
 import java.util.function.Consumer;
 
 public class LinkedListNode<T> {
@@ -10,6 +8,26 @@ public class LinkedListNode<T> {
 
     public LinkedListNode(T data) {
         this.data = data;
+    }
+
+    public static class LinkedListBuilder {
+        private LinkedListNode head = null;
+        private LinkedListNode node = null;
+
+        public LinkedListBuilder add(Object data) {
+            if(head == null) {
+                head = node = new LinkedListNode(data);
+            } else {
+                node.nextNode = new LinkedListNode(data);
+                node = node.nextNode;
+            }
+
+            return this;
+        }
+
+        public LinkedListNode build() {
+            return head;
+        }
     }
 
     public static <Type> LinkedListNode<Type> from(Type[] array) {
@@ -110,5 +128,64 @@ public class LinkedListNode<T> {
         node.nextNode = null;
 
         return newStartNode;
+    }
+
+    public static LinkedListNode sort(LinkedListNode head) {
+
+        if(head.nextNode == null) {
+            return head;
+        }
+
+        LinkedListNode middle = middle(head);
+        LinkedListNode secondHead = middle.nextNode;
+
+        middle.nextNode = null;
+
+        LinkedListNode sortedHead = sort(head);
+        LinkedListNode secondSortedHead = sort(secondHead);
+
+        return merge(sortedHead, secondSortedHead);
+    }
+
+    public static LinkedListNode middle(LinkedListNode head) {
+        LinkedListNode node = head,
+                fastNode = head;
+
+        while(fastNode != null && fastNode.nextNode != null && fastNode.nextNode.nextNode != null) {
+            node = node.nextNode;
+            fastNode = fastNode.nextNode;
+            if(fastNode != null) {
+                fastNode = fastNode.nextNode;
+            }
+        }
+
+        return node;
+    }
+
+    private static LinkedListNode merge(LinkedListNode list1, LinkedListNode list2) {
+        LinkedListNode node1 = list1,
+                node2 = list2;
+
+        LinkedListBuilder builder = new LinkedListBuilder();
+
+        while(node1 != null || node2 != null) {
+            if(node1 == null) {
+                builder.add(node2.data);
+                node2 = node2.nextNode;
+            } else if(node2 == null) {
+                builder.add(node1.data);
+                node1 = node1.nextNode;
+            } else {
+                if((int) node1.data < (int) node2.data) {
+                    builder.add(node1.data);
+                    node1 = node1.nextNode;
+                } else {
+                    builder.add(node2.data);
+                    node2 = node2.nextNode;
+                }
+            }
+        }
+
+        return builder.build();
     }
 }

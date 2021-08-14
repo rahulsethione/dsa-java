@@ -14,8 +14,8 @@ public class CreateOrderTxn {
     public static void main(String[] args) throws Exception {
         int customer_id = 1;
         int restaurant_id = 1;
-        int[] menu_item_ids = new int[] {1};
-        int[] menu_item_quantities = new int[] {4};
+        int[] menu_item_ids = new int[] {1, 5};
+        int[] menu_item_quantities = new int[] {2, 2};
 
         Connection connection = MySQLConnection.getInstance().getConnection();
 

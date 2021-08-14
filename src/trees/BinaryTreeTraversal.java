@@ -2,6 +2,7 @@ package trees;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 import java.util.Stack;
 import java.util.stream.Collectors;
 
@@ -27,7 +28,8 @@ public class BinaryTreeTraversal {
     public static void main(String[] args) {
         BinaryTreeNode testcaseRoot = testCase();
         List inorderList = new LinkedList(), preorderList = new LinkedList(),
-            inorderNoRecursionList = new LinkedList(), preorderNoRecursionList = new LinkedList();
+            inorderNoRecursionList = new LinkedList(), preorderNoRecursionList = new LinkedList(),
+            levelOrderList = new LinkedList();
 
         inorder(testcaseRoot, inorderList);
         log("Inorder " + inorderList.stream().collect(Collectors.joining(", ")));
@@ -40,6 +42,9 @@ public class BinaryTreeTraversal {
 
         preorderNoRecursion(testcaseRoot, preorderNoRecursionList);
         log("Preorder no-recursion " + preorderNoRecursionList.stream().collect(Collectors.joining(", ")));
+
+        preorderNoRecursion(testcaseRoot, levelOrderList);
+        log("Level-order " + levelOrderList.stream().collect(Collectors.joining(", ")));
     }
 
     public static void inorder(BinaryTreeNode node, List inorderList) {
@@ -107,6 +112,27 @@ public class BinaryTreeTraversal {
 
             if(node.getLeftChild() != null)
                 stack.push(node.getLeftChild());
+        }
+    }
+
+    public static void levelOrderTraversalWithBFS(BinaryTreeNode root, List levelOrderList) {
+        if(root == null) return;
+
+        Queue<BinaryTreeNode> queue = new LinkedList();
+
+        queue.add(root);
+
+        while(!queue.isEmpty()) {
+            BinaryTreeNode node = queue.remove();
+
+            levelOrderList.add(node.getData());
+
+            if(node.getLeftChild() != null)
+                queue.add(node.getLeftChild());
+
+            if(node.getRightChild() != null) {
+                queue.add(node.getRightChild());
+            }
         }
     }
 }

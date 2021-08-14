@@ -6,6 +6,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * @tags: Backtracking
+ */
 public class Permutations {
     public static void main(String[] args) {
         Integer[] arr = new Integer[] { 1, 2, 3, 4 };

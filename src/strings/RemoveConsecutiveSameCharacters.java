@@ -42,8 +42,6 @@ public class RemoveConsecutiveSameCharacters {
 
             if(str.charAt(i) == str.charAt(j) && (i - j + 1) == k) {
                 str = str.substring(0, j) + str.substring(i + 1);
-                // j = Math.max(0, j - 1);
-                // i = j;
                 i = j = 0;
             }
         }
